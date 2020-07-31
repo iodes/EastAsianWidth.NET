@@ -8,8 +8,8 @@
     <PackageIcon>Logo.jpg</PackageIcon>
     <PackageIconUrl />
     <PackageTags>Char,Text,String,Korean,Japanese,Chinese</PackageTags>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <Version>1.1.1</Version>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <Version>1.1.2</Version>
     <RepositoryUrl>https://github.com/iodes/EastAsianWidth.NET</RepositoryUrl>
     <PackageProjectUrl>https://github.com/iodes/EastAsianWidth.NET</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

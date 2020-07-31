@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Kodnix.Character.Extensions;
 
@@ -9,7 +10,9 @@ namespace Kodnix.Character
         #region Properties
         public string Value { get; }
 
-        public EastAsianChar[] Characters { get; }
+        public ReadOnlyCollection<EastAsianChar> Characters { get; }
+
+        private readonly EastAsianChar[] _characters;
 
         public int Length
         {
@@ -29,7 +32,8 @@ namespace Kodnix.Character
         public EastAsianString(string value)
         {
             Value = value;
-            Characters = value.Select(x => x.ToEastAsianChar()).ToArray();
+            _characters = value.Select(x => x.ToEastAsianChar()).ToArray();
+            Characters = Array.AsReadOnly(_characters);
         }
         #endregion
 
@@ -44,7 +48,7 @@ namespace Kodnix.Character
 
             var startPosition = IndexToPosition(startIndex);
 
-            return new string(Characters[startPosition..]
+            return new string(_characters[startPosition..]
                 .Select(x => x.Value)
                 .ToArray()).ToEastAsianString();
         }
@@ -69,7 +73,7 @@ namespace Kodnix.Character
             var startPosition = IndexToPosition(startIndex);
             var lengthPosition = LengthToPosition(startPosition, length);
 
-            return new string(Characters[startPosition..(lengthPosition + 1)]
+            return new string(_characters[startPosition..(lengthPosition + 1)]
                 .Select(x => x.Value)
                 .ToArray()).ToEastAsianString();
         }
@@ -80,7 +84,7 @@ namespace Kodnix.Character
         {
             int charLength = 0;
 
-            for (var i = 0; i < Characters.Length; i++)
+            for (var i = 0; i < _characters.Length; i++)
             {
                 charLength += Characters[i].Length;
 
@@ -95,7 +99,7 @@ namespace Kodnix.Character
         {
             int charLength = 0;
 
-            for (var i = startPosition; i < Characters.Length; i++)
+            for (var i = startPosition; i < _characters.Length; i++)
             {
                 charLength += Characters[i].Length;
 

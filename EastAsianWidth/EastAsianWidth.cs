@@ -257,7 +257,6 @@ namespace Kodnix.Character
             {
                 case EastAsianWidthKind.Full:
                 case EastAsianWidthKind.Wide:
-                case EastAsianWidthKind.Ambiguous:
                     return 2;
             }
 

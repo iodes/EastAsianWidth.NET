@@ -84,8 +84,8 @@ namespace Kodnix.Character
             {
                 charLength += Characters[i].Length;
 
-                if (charLength > length)
-                    return i;
+                if (charLength >= length)
+                    return i + 1;
             }
 
             return -1;
@@ -94,6 +94,18 @@ namespace Kodnix.Character
         private int LengthToPosition(int length)
         {
             return LengthToPosition(0, length);
+        }
+        #endregion
+
+        #region Override Methods
+        public static implicit operator string(EastAsianString value)
+        {
+            return value.Value;
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
         #endregion
     }

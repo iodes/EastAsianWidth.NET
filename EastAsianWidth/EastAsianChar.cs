@@ -40,5 +40,17 @@ namespace Kodnix.Character
             Value = value;
         }
         #endregion
+
+        #region Override Methods
+        public static implicit operator char(EastAsianChar value)
+        {
+            return value.Value;
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+        #endregion
     }
 }

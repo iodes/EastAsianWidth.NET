@@ -34,6 +34,21 @@ namespace Kodnix.Character
         #endregion
 
         #region Public Methods
+        public EastAsianString Substring(int startIndex)
+        {
+            if (startIndex < 0)
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+
+            if (startIndex > Length)
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+
+            var startPosition = IndexToPosition(startIndex);
+
+            return new string(Characters[startPosition..]
+                .Select(x => x.Value)
+                .ToArray()).ToEastAsianString();
+        }
+
         public EastAsianString Substring(int startIndex, int length)
         {
             if (startIndex < 0)
@@ -54,7 +69,7 @@ namespace Kodnix.Character
             var startPosition = IndexToPosition(startIndex);
             var lengthPosition = LengthToPosition(startPosition, length);
 
-            return new string(Characters[startPosition..lengthPosition]
+            return new string(Characters[startPosition..(lengthPosition + 1)]
                 .Select(x => x.Value)
                 .ToArray()).ToEastAsianString();
         }
@@ -84,8 +99,11 @@ namespace Kodnix.Character
             {
                 charLength += Characters[i].Length;
 
-                if (charLength >= length)
-                    return i + 1;
+                if (charLength == length)
+                    return i;
+
+                if (charLength > length)
+                    return i - 1;
             }
 
             return -1;

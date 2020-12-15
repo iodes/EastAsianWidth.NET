@@ -18,8 +18,7 @@ namespace Kodnix.Character
         {
             get
             {
-                if (_length == null)
-                    _length = Value.GetEastAsianWidthLength();
+                _length ??= Value.GetEastAsianWidthLength();
 
                 return _length.Value;
             }
